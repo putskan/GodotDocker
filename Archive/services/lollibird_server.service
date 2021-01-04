@@ -1,0 +1,13 @@
+[Unit]
+Description=lollibird_server
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/share/nginx/server/Godot_server_v3.2.3 --main-pack /usr/share/nginx/server/server.pck 
+
+[Install]
+WantedBy=multi-user.target

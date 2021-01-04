@@ -1,0 +1,19 @@
+FROM nginx:latest
+
+RUN apt-get update && apt-get install -y procps net-tools tcpdump
+
+# deploy & run server-side as a service
+# https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
+RUN mkdir -p /usr/share/nginx/server
+COPY ./server /usr/share/nginx/server
+RUN chmod -R 777 /usr/share/nginx/server
+#RUN /usr/share/nginx/server/Godot_server_v3.2.3 --main-pack /usr/share/nginx/server/server.pck &
+COPY ./services/lollibird_server /etc/init.d/lollibird_server
+RUN update-rc.d lollibird_server defaults
+
+
+# deploy & run client-side
+COPY ./client /usr/share/nginx/html
+RUN nginx
+RUN update-rc.d nginx defaults
+
