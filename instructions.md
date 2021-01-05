@@ -29,16 +29,13 @@ https://www.youtube.com/watch?v=7Uv5bI-H2t0
 npm i -g heroku
 # login
 heroku login
-# sync git repo to Heroku
-# cd <git-project-directory>
-# heroku git:remote -a lollibird
-# deploy docker container in Heroku
 heroku container:login
-cd <project>
-heroku create <app-name>
+cd <dockerfile-folder>
+heroku create <app-name> --region eu
 heroku container:push web --app <app-name>
 heroku container:release web --app <app-name>
 heroku open --app <app-name>
+
 # now we can navigate to the the website
 # for debug purposes:
 heroku run bash --app lollibird
