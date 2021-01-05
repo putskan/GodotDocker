@@ -1,16 +1,23 @@
 FROM nginx:latest
 
+#RUN adduser -D myuser
+#USER myuser
+
 RUN apt-get update && apt-get install -y procps net-tools tcpdump supervisor libpq-dev gettext-base
 
-# copy server-side
 RUN mkdir -p /usr/share/nginx/server
 COPY ./server /usr/share/nginx/server
 RUN chmod -R 777 /usr/share/nginx/server
 
-# copy client-side
 COPY ./client /usr/share/nginx/html
+COPY ./nginx_default.conf.template /etc/nginx/conf.d/default.conf.template
 
-# run server
-RUN nginx
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-CMD ["/usr/bin/supervisord"]
+
+# Heroku
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx && /usr/bin/supervisord
+
+# Generic Docker
+# CMD /bin/bash -c nginx && /usr/bin/supervisord
+
+

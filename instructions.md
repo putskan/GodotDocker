@@ -40,5 +40,7 @@ heroku container:push web --app <app-name>
 heroku container:release web --app <app-name>
 heroku open --app <app-name>
 # now we can navigate to the the website
+# for debug purposes:
+heroku run bash --app lollibird
 # Additional resources:
 https://www.youtube.com/watch?v=gO0fMlZgDco&t=329s
