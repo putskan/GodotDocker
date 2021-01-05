@@ -1,8 +1,5 @@
 FROM nginx:latest
 
-#RUN adduser -D myuser
-#USER myuser
-
 RUN apt-get update && apt-get install -y procps net-tools tcpdump supervisor libpq-dev gettext-base
 
 RUN mkdir -p /usr/share/nginx/server

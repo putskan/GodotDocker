@@ -1,0 +1,15 @@
+General Idea:
+*Deploying Godot multiplayer web game
+*Hosting: Heroku
+*Docker based
+
+
+Steps:
+1. Install docker & pull Nginx image (docker pull nginx)
+2. Export projects (client: HTML5, server: Linux PCK)
+	Don't forget changing client's WS info
+3. Download Godot server build
+3. Create Nginx configuration file
+4. Create a Dockerfile (for Heroku)
+5. Upload to Heroku
+
